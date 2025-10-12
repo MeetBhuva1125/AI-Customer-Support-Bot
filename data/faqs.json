@@ -1,0 +1,27 @@
+[
+  {
+    "question": "What are your business hours?",
+    "answer": "Our business hours are Monday to Friday, 9 AM to 6 PM EST. We're closed on weekends and major holidays.",
+    "keywords": ["hours", "timing", "open", "close", "schedule", "when"]
+  },
+  {
+    "question": "How do I reset my password?",
+    "answer": "To reset your password: 1) Click 'Forgot Password' on the login page, 2) Enter your registered email, 3) Check your email for a reset link, 4) Follow the link and create a new password. The link expires in 24 hours.",
+    "keywords": ["password", "reset", "forgot", "login", "access", "account"]
+  },
+  {
+    "question": "What is your refund policy?",
+    "answer": "We offer a 30-day money-back guarantee on all purchases. To request a refund, contact our support team with your order number. Refunds are processed within 5-7 business days.",
+    "keywords": ["refund", "money back", "return", "cancel", "guarantee"]
+  },
+  {
+    "question": "How can I track my order?",
+    "answer": "You can track your order by: 1) Logging into your account, 2) Going to 'My Orders', 3) Clicking on the specific order. You'll also receive tracking updates via email.",
+    "keywords": ["track", "order", "shipping", "delivery", "status", "package"]
+  },
+  {
+    "question": "Do you offer international shipping?",
+    "answer": "Yes, we ship to over 50 countries worldwide. Shipping costs and delivery times vary by location. International orders typically arrive within 7-14 business days.",
+    "keywords": ["international", "shipping", "worldwide", "global", "country"]
+  }
+]
