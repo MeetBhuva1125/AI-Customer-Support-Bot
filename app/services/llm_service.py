@@ -11,7 +11,7 @@ class LLMService:
         #initialize Gemini Client
         api_key = os.getenv("GEMINI_API_KEY")
         self.client = genai.Client(api_key=api_key)
-        self.model = "gemini-2.0-flash"
+        self.model = "gemini-2.5-flash"
 
     async def generate_response(
         self, 
@@ -61,7 +61,7 @@ class LLMService:
             response = self.client.models.generate_content(
                 model = self.model,
                 contents = contents,
-                config = types.GenerateContentConifg(
+                config = types.GenerateContentConfig(
                     system_instruction = system_instruction,
                     temperature = 0.7,
                     max_output_tokens = 500

@@ -1,3 +1,8 @@
+from dotenv import load_dotenv
+
+# Load environment variables FIRST before any other imports
+load_dotenv(override=True)
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
@@ -11,10 +16,14 @@ from app.routes import chat, session
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # Startup
+    print("🚀 Starting AI Customer Support Bot...")
+    print(f"✓ Environment loaded from .env")
+    print(f"✓ API Key present: {bool(os.getenv('GEMINI_API_KEY'))}")
+    
     await init_db()
     yield
     # Shutdown
-    pass
+    print("👋 Shutting down...")
 
 app = FastAPI(
     title="AI Customer Support Bot",
@@ -26,7 +35,7 @@ app = FastAPI(
 # CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Configure appropriately for production
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -37,7 +46,6 @@ app.include_router(chat.router)
 app.include_router(session.router)
 
 # Serve frontend static files
-# IMPORTANT: Mount static files BEFORE defining routes that might conflict
 if os.path.exists("frontend"):
     app.mount("/static", StaticFiles(directory="frontend"), name="static")
 
@@ -64,9 +72,11 @@ async def serve_chat_ui():
 
 @app.get("/health")
 async def health_check():
-    return {"status": "healthy"}
+    return {
+        "status": "healthy",
+        "gemini_api_configured": bool(os.getenv("GEMINI_API_KEY"))
+    }
 
-# Programmatic uvicorn server (optional - for running with `python main.py`)
 if __name__ == "__main__":
     import uvicorn
     
@@ -74,7 +84,7 @@ if __name__ == "__main__":
         "main:app",
         host="127.0.0.1",
         port=8000,
-        reload=True,  # Enable auto-reload for development
+        reload=True,
         log_level="info",
         access_log=True
     )

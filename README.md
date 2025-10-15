@@ -2,7 +2,7 @@
 
 An intelligent customer support chatbot powered by Google Gemini AI that handles customer queries, maintains conversation context, and automatically escalates complex issues to human support agents.
 
-![Python](https://img.shields.io/badge/python-3.9+-blue.svg)
+![Python](https://img.shields.io/badge/python-3.12+-blue.svg)
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.115.0-009688.svg)
 ![Gemini](https://img.shields.io/badge/Google-Gemini%20AI-4285F4.svg)
 ![uv](https://img.shields.io/badge/uv-package%20manager-blueviolet.svg)
@@ -24,13 +24,13 @@ An intelligent customer support chatbot powered by Google Gemini AI that handles
 - [Prompt Engineering](#prompt-engineering)
 - [Database Schema](#database-schema)
 - [Escalation Logic](#escalation-logic)
-- [Testing](#testing)
-- [Deployment](#deployment)
-- [Troubleshooting](#troubleshooting)
-- [Contributing](#contributing)
-- [License](#license)
+<!-- - [Testing](#testing) -->
+<!-- - [Deployment](#deployment) -->
+<!-- - [Troubleshooting](#troubleshooting) -->
+<!-- - [Contributing](#contributing) -->
+<!-- - [License](#license) -->
 
-## 🎯 Overview
+## Overview 
 
 This AI-powered customer support bot leverages **Google Gemini 2.0** to create realistic customer support interactions with the following capabilities:
 
@@ -43,7 +43,7 @@ This AI-powered customer support bot leverages **Google Gemini 2.0** to create r
 
 Built as a production-ready REST API with FastAPI, this project demonstrates best practices in AI integration, session management, and conversational AI systems.
 
-## ✨ Features
+## Features
 
 ### Core Functionality
 - ✅ **Gemini AI Integration**: Powered by Google's latest Gemini 2.0 Flash model
@@ -64,11 +64,52 @@ Built as a production-ready REST API with FastAPI, this project demonstrates bes
 - 🔒 **Type Safety**: Pydantic models for request/response validation
 - 🎨 **Real-time UI**: Typing indicators, animations, and quick replies
 
-## 🏗️ Architecture
-![alt text](image-1.png)
+## Architecture
+![System Architecture](image-1.png)
 
+```mermaid
+  graph LR;
+    ROOT[ai-customer-support-bot/]
+    
+    ROOT --> MAIN[main.py];
+    ROOT --> ENV[.env];
+    ROOT --> PYPROJECT[pyproject.toml];
+    ROOT --> README[README.md];
+    
+    ROOT --> APP[app/];
+    APP --> DB[database.py];
+    APP --> MODELS[models.py];
+    APP --> ROUTES[routes/];
+    APP --> SERVICES[services/];
+    
+    ROUTES --> CHAT[chat.py];
+    ROUTES --> SESSION[session.py];
+    
+    SERVICES --> LLM_SRV[llm_service.py];
+    SERVICES --> FAQ_SRV[faq_service.py];
+    SERVICES --> ESC_SRV[escalation.py];
+    
+    ROOT --> FRONTEND[frontend/];
+    FRONTEND --> HTML[index.html];
+    FRONTEND --> CSS[styles.css];
+    FRONTEND --> JS[app.js];
+    
+    ROOT --> DATA[data/];
+    DATA --> FAQS[faqs.json];
+    DATA --> SAMPLES[sample_queries.txt];
+    
+    ROOT --> TESTS[tests/];
+    TESTS --> TEST_CHAT[test_chat.py];
+    TESTS --> TEST_SESSION[test_session.py];
+    
+    style ROOT fill:#ffeb3b;
+    style APP fill:#2196f3;
+    style FRONTEND fill:#4caf50;
+    style DATA fill:#ff9800;
+    style TESTS fill:#9c27b0;
+```
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 | Component | Technology | Purpose |
 |-----------|-----------|---------|
@@ -80,7 +121,7 @@ Built as a production-ready REST API with FastAPI, this project demonstrates bes
 | **Environment** | Python-dotenv | Configuration management |
 | **Package Manger** | UV | For fast and easy package management
 
-## 📦 Prerequisites
+## Prerequisites
 
 Before installation, ensure you have:
 
@@ -91,7 +132,56 @@ Before installation, ensure you have:
   - OpenAI API ([Get key](https://platform.openai.com/api-keys))
   - Google Gemini API ([Get key](https://aistudio.google.com/app/apikey))
 
-## 🚀 Installation
+## Installation
 
 ### Step 1: Clone the Repository
+`git clone https://github.com/yourusername/ai-customer-support-bot.git`
+<br> `cd ai-customer-support-bot`
+
+### Step 2: Create Virtual Environment
+`uv venv` OR `pip -m venv venv`
+<br> `.venv\Scripts\Activate`
+
+
+### Step 3: Install Dependencies
+`uv sync`(This will automatically create a virtual environment and activate it)
+
+### Step 4: Set Up Environment Variables
+Create a `.env` file in the root directory:
+`cp .env.example .env`
+<br> GEMINI_API_KEY=your-gemini-api-key-here
+<br> **Database Configuration**
+<br> DATABASE_URL=sqlite+aiosqlite:///./chat_sessions.db
+<br>**Bot Configuration**
+<br>ESCALATION_THRESHOLD=3
+MAX_CONTEXT_MESSAGES=10
+
+### Step 5: Initialize the Database
+
+The database will be automatically created when you first run the application.
+
+## Configuration
+
+### Environment Variables
+
+| Variable | Description | Default | Required |
+|----------|-------------|---------|----------|
+| `GEMINI_API_KEY` | Google Gemini API key | - | Yes (if using Gemini) |
+| `DATABASE_URL` | SQLite database connection string | `sqlite+aiosqlite:///./chat_sessions.db` | No |
+| `ESCALATION_THRESHOLD` | Number of attempts before auto-escalation | `3` | No |
+| `MAX_CONTEXT_MESSAGES` | Maximum conversation history length | `14` | No |
+
+### FAQ Customization
+Edit `data/faqs.json` to customize your FAQ database:
+
+
+## Usage
+
+### Running the Server
+`uv run main.py`
+<br>
+The API will be available at:
+- **API Base**: `http://localhost:8000`
+- **Interactive Docs**: `http://localhost:8000/docs`
+- **ReDoc**: `http://localhost:8000/redoc`
 
