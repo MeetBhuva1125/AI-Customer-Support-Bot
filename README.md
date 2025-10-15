@@ -8,6 +8,8 @@ An intelligent customer support chatbot powered by Google Gemini AI that handles
 ![uv](https://img.shields.io/badge/uv-package%20manager-blueviolet.svg)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 
+## Demo Video Link : [Link](https://drive.google.com/file/d/1Y7jAPteZD-9Hqfq1vx0b_bcinsE8gSj0/view?usp=sharing)
+
 ## 📋 Table of Contents
 
 - [Overview](#overview)
@@ -185,3 +187,54 @@ The API will be available at:
 - **Interactive Docs**: `http://localhost:8000/docs`
 - **ReDoc**: `http://localhost:8000/redoc`
 
+### Status Codes
+| Code | Meaning |
+|------|---------|
+| 200 | Success |
+| 201 | Created |
+| 400 | Bad Request (invalid session or closed session) |
+| 404 | Session Not Found |
+| 500 | Internal Server Error |
+
+## 💬 Prompt Engineering
+
+### System Prompt Structure
+
+The bot uses a carefully crafted system prompt for consistent behavior:
+
+You are a helpful customer support assistant.
+
+Your role:
+
+- Answer customer queries professionally and concisely
+
+- Use the FAQ database when relevant
+
+- Be empathetic and solution-oriented
+
+- If you cannot answer confidently, suggest escalation
+
+[FAQ Context injected here]
+
+Guidelines:
+
+- Keep responses clear and under 3 paragraphs
+
+- Provide actionable solutions
+
+- If information is missing, ask clarifying questions
+
+### Prompt Strategies
+
+1. **Role Definition**: Clear identity as customer support assistant
+2. **Behavioral Guidelines**: Empathy, professionalism, conciseness
+3. **Context Injection**: FAQ database provided in system message
+4. **Constraint Setting**: Length limits, action-oriented responses
+5. **Escalation Awareness**: Built-in understanding of limitations
+
+### Conversation Context Management
+
+- **Sliding Window**: Last 10 messages retained (configurable)
+- **Token Budget**: ~3000 tokens reserved for context
+- **Message Format**: Alternating user/assistant structure
+- **Summary Generation**: AI-powered summaries for escalations

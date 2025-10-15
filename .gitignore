@@ -12,3 +12,4 @@ wheels/
 #environment variables
 .env
 chat_sessions.db
+project demo.mp4

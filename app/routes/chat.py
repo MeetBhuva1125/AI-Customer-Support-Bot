@@ -86,7 +86,7 @@ async def chat(
         # Try FAQ matching first
         faq_match = faq_service.find_matching_faq(request.message)
         
-        if faq_match and faq_match.get('confidence', 0) > 80:
+        if faq_match and faq_match.get('confidence', 0) > 70:
             response_text = faq_match['answer']
             faq_matched = True
             confidence = faq_match['confidence']

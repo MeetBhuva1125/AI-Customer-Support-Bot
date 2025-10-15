@@ -11,7 +11,7 @@ class LLMService:
         #initialize Gemini Client
         api_key = os.getenv("GEMINI_API_KEY")
         self.client = genai.Client(api_key=api_key)
-        self.model = "gemini-2.5-flash"
+        self.model = "gemini-2.5-flash-lite"
 
     async def generate_response(
         self, 
@@ -25,7 +25,7 @@ class LLMService:
         system_instruction = f"""You are a helpful customer support assistant. 
         Your role:
         - Answer customer queries professionally and concisely
-        - Use the FAQ database when relevant
+        - Use the FAQ context when relevant
         - Be empathetic and solution-oriented
         - If you cannot answer confidently, suggest escalation to human support
 
